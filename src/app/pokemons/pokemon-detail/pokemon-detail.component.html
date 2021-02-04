@@ -1,0 +1,37 @@
+<ng-container *ngIf="pokemon">
+  <mat-card class="detail-pokemon">
+    <mat-grid-list cols="2">
+      <mat-grid-tile>
+        <div>
+          <img mat-card-lg-image src="assets/img/official-artwork/{{pokemon.id}}.png" alt="pokemon sprite" />
+          <p>No. {{transformNumber(pokemon.id)}}</p>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-list>
+          <mat-list-item>
+            <strong>{{pokemon.name}}</strong>
+            <button mat-icon-button (click)="audio.play()">
+              <mat-icon>play_circle_outline</mat-icon>
+            </button>
+            <audio autoplay #audio>
+              <source src="assets/audio/{{pokemon.id}}.mp3" type="audio/mpeg" >
+              <p>Votre navigateur ne prend pas en charge l'audio HTML. Voici un <a href="assets/audio/{{pokemon.id}}.mp3">lien vers le fichier audio</a> pour le télécharger.</p>
+            </audio>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-chip-list aria-label="Types">
+              <mat-chip color="primary" *ngFor="let type of pokemon.types">{{type}}</mat-chip>
+            </mat-chip-list>
+          </mat-list-item>
+          <mat-list-item>Taille: {{pokemon.height}} m</mat-list-item>
+          <mat-list-item>Poids: {{pokemon.weight}} kg</mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <p>{{pokemon.description}}</p>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</ng-container>
+<button mat-button mat-stroked-button color="primary" (click)="goBack()">Go back</button>
