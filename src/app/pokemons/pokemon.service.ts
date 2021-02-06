@@ -38,13 +38,16 @@ export class PokemonService {
     )
   }
 
-  getPokemons(offset?: number, limit?: number): Observable<ApiResponse<Pokemon>> {
+  getPokemons(offset?: number, limit?: number, search?: string): Observable<ApiResponse<Pokemon>> {
     let params= new HttpParams();
     if(offset) {
-      params = params.set('offset', `${offset}`)
+      params = params.set('offset', `${offset}`);
     }
     if(limit) {
-      params = params.set('limit', `${limit}`)
+      params = params.set('limit', `${limit}`);
+    }
+    if(search) {
+      params = params.set('search', search);
     }
     return this.http.get<ApiResponse<Pokemon>>(this.baseUrl, {params})
       .pipe(

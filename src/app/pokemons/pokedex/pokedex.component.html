@@ -1,0 +1,11 @@
+<mat-sidenav-container class="pokedex-container">
+  <mat-sidenav mode="side" opened class="menu" >
+    <app-pokemon-list (selectPokemonEvent)="printNewPokemon($event)">
+    </app-pokemon-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-pokemon-detail [id]="currentPokemonId">
+    </app-pokemon-detail>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChild, OnChanges} from '@angular/core';
 import {Pokemon} from "../../models/pokemon.model";
 import {PokemonService} from "../pokemon.service";
 import {ApiResponse} from "../../models/api-response.model";
+import {MatSidenavContainer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,26 +11,41 @@ import {ApiResponse} from "../../models/api-response.model";
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemons: Pokemon[];
+  pokemons: Pokemon[] = [];
+
+  lastSearch: string = "";
+
+  @Output() selectPokemonEvent = new EventEmitter<number>();
 
   constructor(private pokemonService: PokemonService) { }
 
-  ngOnInit(): void {
-    this.pokemonService.getPokemons().subscribe(
-      (result: ApiResponse<Pokemon>) => this.pokemons = result.data
+  ngOnInit() {
+    this.getPokemons(0,20);
+  }
+
+  getPokemons(offset?: number, limit?: number, search?: string): void {
+    this.lastSearch = search;
+    this.pokemonService.getPokemons(offset, limit, search).subscribe(
+      (result: ApiResponse<Pokemon>) => {
+        if( !offset )
+          this.pokemons = result.data
+        else
+          this.pokemons.push(...result.data)
+      }
     );
+  }
+
+  emitNewPokemon(id: number) {
+    this.selectPokemonEvent.emit(id);
   }
 
   /**
    * Récupérer les 10 prochains pokémons
    */
   onScroll(): void {
-    console.log("scrolled!")
     const offset: number = this.pokemons.length;
     const limit: number = 10;
-    this.pokemonService.getPokemons(offset, limit).subscribe(
-      (result: ApiResponse<Pokemon>) => this.pokemons.push(...result.data)
-    );
+    this.getPokemons(offset, limit, this.lastSearch);
   }
 
 }
