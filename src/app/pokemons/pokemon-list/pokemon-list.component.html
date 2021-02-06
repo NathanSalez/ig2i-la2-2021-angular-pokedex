@@ -1,5 +1,11 @@
-<mat-nav-list infinite-scroll (scrolled)="onScroll()">
-  <mat-list-item *ngFor="let pokemon of pokemons" routerLink="/pokemons/{{pokemon.id}}">
+<form>
+  <mat-form-field>
+    <mat-label>Search pokemons</mat-label>
+    <input matInput placeholder="Bulbizarre ou 1" [ngModel]="this.lastSearch" (ngModelChange)="getPokemons(0,20, $event)" name="search" />
+  </mat-form-field>
+</form>
+<mat-nav-list infinite-scroll [scrollWindow]="false" (scrolled)="onScroll()" class="pokemon-list">
+  <mat-list-item *ngFor="let pokemon of pokemons" (click)="emitNewPokemon(pokemon.id)">
     <img class="clickable" matListAvatar src="assets/img/sprites/{{pokemon.id}}.png" alt="{{pokemon.name}}">
     <h3 class="clickable" matLine>{{pokemon.id}}.{{pokemon.name}} </h3>
   </mat-list-item>

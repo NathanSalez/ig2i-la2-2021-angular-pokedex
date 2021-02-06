@@ -1,38 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, Input, OnChanges} from '@angular/core';
 import {PokemonService} from "../pokemon.service";
 import {Pokemon} from "../../models/pokemon.model";
 import { DecimalPipe } from '@angular/common';
 import {Location} from '@angular/common';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss']
 })
-export class PokemonDetailComponent implements OnInit {
+export class PokemonDetailComponent implements OnChanges {
 
-  pokemon: Pokemon;
+  @Input() id?: number;
+  pokemon$: Observable<Pokemon>;
 
-  constructor(private route: ActivatedRoute, private pokemonService: PokemonService, private decimalPipe: DecimalPipe, private location: Location) { }
+  constructor(private pokemonService: PokemonService, private decimalPipe: DecimalPipe) { }
 
-  ngOnInit(): void {
-    this.getPokemon()
+  ngOnChanges() {
+    this.getPokemon(this.id);
   }
 
   transformNumber(n: number): string {
     return this.decimalPipe.transform(n, '3.0-0')
   }
 
-  getPokemon(): void {
-    const id: number = +this.route.snapshot.paramMap.get('id');
-    this.pokemonService.getPokemon(id).subscribe(
-      result => this.pokemon = result
-    );
-  }
+  getPokemon(id?: number): void {
+    this.pokemon$ = this.pokemonService.getPokemon(id);
 
-  goBack(): void {
-    this.location.back();
   }
 
 }

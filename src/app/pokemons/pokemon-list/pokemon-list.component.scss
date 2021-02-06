@@ -1,3 +1,8 @@
 .clickable {
   cursor: pointer;
 }
+
+.pokemon-list {
+  height: calc(100vh - 8px - 57px);
+  overflow: auto;
+}
