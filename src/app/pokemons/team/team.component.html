@@ -1,0 +1,12 @@
+<mat-sidenav-container class="team-container">
+  <mat-sidenav opened class="menu" mode="side">
+    <app-pokemon-list message="Add a pokemon" (selectPokemonEvent)="addPokemon($event)">
+    </app-pokemon-list>
+  </mat-sidenav>
+  <mat-sidenav mode="side" opened class="menu" position="end" >
+    <app-team-list message="Your team" [team]="compo" (teamChange)="removePokemon($event)"></app-team-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-team-print [team]="compo"></app-team-print>
+  </mat-sidenav-content>
+</mat-sidenav-container>
