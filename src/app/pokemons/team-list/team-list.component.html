@@ -1,0 +1,8 @@
+<p class="message">{{message}}</p>
+<mat-nav-list>
+  <mat-list-item *ngFor="let pokemon of team; index as i;">
+    <mat-icon class="clickable" (click)="deletePokemon(i)" mat-list-icon>clear</mat-icon>
+    <img matListAvatar src="assets/img/sprites/{{pokemon.id}}.png" alt="{{pokemon.name}}">
+    <h3 matLine>{{pokemon.name}}</h3>
+  </mat-list-item>
+</mat-nav-list>

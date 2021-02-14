@@ -1,8 +1,7 @@
-import {Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChild, OnChanges} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChild, OnChanges, Input} from '@angular/core';
 import {Pokemon} from "../../models/pokemon.model";
 import {PokemonService} from "../pokemon.service";
 import {ApiResponse} from "../../models/api-response.model";
-import {MatSidenavContainer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-pokemon-list',
@@ -12,6 +11,8 @@ import {MatSidenavContainer} from "@angular/material/sidenav";
 export class PokemonListComponent implements OnInit {
 
   pokemons: Pokemon[] = [];
+
+  @Input() message?: string;
 
   lastSearch: string = "";
 

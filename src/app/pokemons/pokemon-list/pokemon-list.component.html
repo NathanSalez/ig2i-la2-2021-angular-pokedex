@@ -1,4 +1,5 @@
 <form>
+  <p class="message">{{message}}</p>
   <mat-form-field>
     <mat-label>Search pokemons</mat-label>
     <input matInput placeholder="Bulbizarre ou 1" [ngModel]="this.lastSearch" (ngModelChange)="getPokemons(0,20, $event)" name="search" />

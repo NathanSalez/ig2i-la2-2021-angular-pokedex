@@ -3,6 +3,10 @@
 }
 
 .pokemon-list {
-  height: calc(100vh - 8px - 57px);
+  height: calc(100vh - 8px - 57px - 40px);
   overflow: auto;
+}
+
+.message {
+  text-align: center;
 }

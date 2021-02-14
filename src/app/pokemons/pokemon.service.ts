@@ -33,7 +33,7 @@ export class PokemonService {
   getPokemon(id: number): Observable<Pokemon> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<Pokemon>(url).pipe(
-      tap(result => console.log(result)),
+      //tap(result => console.log(result)),
       catchError(this.handleError<Pokemon>('getPokemon'))
     )
   }

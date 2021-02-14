@@ -1,0 +1,28 @@
+<mat-grid-list cols="3">
+  <mat-grid-tile *ngFor="let pokemon of team">
+    <mat-card class="detail-pokemon">
+      <mat-grid-list cols="2">
+        <mat-grid-tile>
+          <div>
+            <img mat-card-lg-image src="assets/img/official-artwork/{{pokemon.id}}.png" alt="pokemon sprite" />
+            <p>{{pokemon.name}}</p>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item>
+              <mat-chip-list aria-label="Types">
+                <mat-chip color="primary" *ngFor="let type of pokemon.types">{{type}}</mat-chip>
+              </mat-chip-list>
+            </mat-list-item>
+            <mat-list-item>Taille: {{pokemon.height}} m</mat-list-item>
+            <mat-list-item>Poids: {{pokemon.weight}} kg</mat-list-item>
+          </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <p>{{pokemon.description}}</p>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

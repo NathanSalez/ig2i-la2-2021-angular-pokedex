@@ -14,11 +14,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
+import { TeamListComponent } from './team-list/team-list.component';
+import { TeamPrintComponent } from './team-print/team-print.component';
+import { TeamComponent } from './team/team.component';
 
 
 
 @NgModule({
-  declarations: [PokemonListComponent, PokemonDetailComponent, PokedexComponent],
+  declarations: [PokemonListComponent, PokemonDetailComponent, PokedexComponent, TeamListComponent, TeamPrintComponent, TeamComponent],
   exports: [
     PokemonListComponent
   ],
